@@ -20,43 +20,16 @@
     </LinearLayout>
 
 
-    <ScrollView
-        android:id="@+id/horizontalScrollView"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_view"
+        android:name="com.example.storeapp.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
-        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/category_item" />
-
-            <include layout="@layout/category_item" />
-
-            <include layout="@layout/category_item" />
-
-            <include layout="@layout/category_item" />
-        </LinearLayout>
-    </ScrollView>
-
-    <!--    <androidx.fragment.app.FragmentContainerView-->
-    <!--        android:id="@+id/fragment_container_view"-->
-    <!--        android:name="com.example.storeapp.LoginFragment"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        tools:layout="@layout/fragment_login" />-->
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_home" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
