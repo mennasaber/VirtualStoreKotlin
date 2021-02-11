@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Virtual Store</string>
+    <string name="app_name">Al-Mira</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login">LOGIN</string>
@@ -13,4 +13,17 @@
     <string name="add">Add</string>
     <string name="see_all">See All</string>
     <string name="view_all">View all</string>
+
+    <string name="code">Code</string>
+    <string name="colors">Colors</string>
+    <string name="size">Size</string>
+    <string name="material">Material</string>
+    <string name="price">Price</string>
+    <string name="details">Details</string>
+    <string name="code_">Code:</string>
+    <string name="colors_">Colors:</string>
+    <string name="size_">Size:</string>
+    <string name="material_">Material:</string>
+    <string name="price_">Price:</string>
+    <string name="details_">Details:</string>
 </resources>
