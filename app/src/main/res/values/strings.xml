@@ -26,4 +26,9 @@
     <string name="material_">Material:</string>
     <string name="price_">Price:</string>
     <string name="details_">Details:</string>
+    <string name="choose_color">Choose color</string>
+    <string name="choose_size">Choose size</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_to_cart">Add to cart</string>
 </resources>

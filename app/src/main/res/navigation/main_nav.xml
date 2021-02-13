@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/imageFragment"
-        android:name="com.example.storeapp.ImageFragment"
+        android:name="com.example.storeapp.fragments.ImageFragment"
         android:label="fragment_image"
         tools:layout="@layout/fragment_image" >
         <action

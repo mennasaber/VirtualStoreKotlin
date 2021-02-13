@@ -9,31 +9,34 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.storeapp.R
 import com.example.storeapp.adapters.ProductsAdapter
+import com.example.storeapp.databinding.FragmentHomeBinding
 import com.example.storeapp.viewmodels.HomeFragmentVM
 
 class HomeFragment : Fragment() {
     private val model: HomeFragmentVM by viewModels()
     lateinit var navController: NavController
+    private lateinit var binding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        setupUI()
+        return binding.root
+    }
 
-        val productsRecyclerView = view.findViewById<RecyclerView>(R.id.productsRecyclerView)
-        val width = resources.configuration.screenWidthDp
-        val spanCount = width / 155
-        val linearLayoutManager = GridLayoutManager(requireContext(), spanCount)
+    private fun setupUI() {
+        val productsRecyclerView = binding.productsRecyclerView
+        val screenWidth = resources.configuration.screenWidthDp
+        val spanCount = screenWidth / 155
+        val gridLayoutManager = GridLayoutManager(requireContext(), spanCount)
 
         model.getProducts().observe(requireActivity(), {
             productsRecyclerView.adapter =
-                ProductsAdapter(it, 1, navController)
-            productsRecyclerView.layoutManager = linearLayoutManager
+                ProductsAdapter(it, navController)
+            productsRecyclerView.layoutManager = gridLayoutManager
         })
-        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
