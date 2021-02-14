@@ -4,14 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.storeapp.R
+import com.example.storeapp.activities.MainActivity
+import com.example.storeapp.databinding.AddToCartLayoutBinding
 import com.example.storeapp.databinding.FragmentDetailsBinding
 import com.example.storeapp.databinding.LayoutTopDetailsToolbarBinding
+import com.example.storeapp.models.CartItem
 import com.example.storeapp.models.Product
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -73,15 +77,48 @@ class DetailsFragment : Fragment(), View.OnClickListener {
                 navController.navigate(R.id.action_detailsFragment_to_imageFragment, bundle)
             }
             binding.addToCartB.id -> {
-                val builder: android.app.AlertDialog.Builder =
-                    android.app.AlertDialog.Builder(requireContext())
-                builder.setView(R.layout.add_to_cart_layout)
-                builder.create()?.show()
+                setupDialog()
             }
             toolbarBinding.backIV.id -> {
                 navController.navigate(R.id.action_detailsFragment_to_homeFragment)
             }
         }
 
+    }
+
+    private fun setupDialog() {
+        val builder: android.app.AlertDialog.Builder =
+            android.app.AlertDialog.Builder(requireContext())
+        val dialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.add_to_cart_layout, null)
+        val dialog = builder.create()
+        val dialogBinding = AddToCartLayoutBinding.bind(dialogView)
+
+        val colors = product.colors.split('-')
+        val colorAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, colors)
+        dialogBinding.colorSpinner.adapter = colorAdapter
+
+        val sizes = product.size.split('-')
+        val sizeAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, sizes)
+        dialogBinding.sizeSpinner.adapter = sizeAdapter
+
+        dialogBinding.doneB.setOnClickListener {
+            val currentActivity: MainActivity = activity as MainActivity
+            currentActivity.model.cart.add(
+                CartItem(
+                    dialogBinding.sizeSpinner.selectedItem.toString(),
+                    dialogBinding.colorSpinner.selectedItem.toString(),
+                    product.code,
+                    product.price
+                )
+            )
+            Toast.makeText(requireContext(), "Product added to cart", Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+        dialogBinding.cancelB.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.setView(dialogView)
+        dialog.show()
     }
 }

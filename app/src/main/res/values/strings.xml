@@ -31,4 +31,14 @@
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
     <string name="add_to_cart">Add to cart</string>
+    <string name="color">Color</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="total">Total</string>
+    <string name="confirm_message">شكراً لشرائك من آل ميرا.\n سيتم التواصل معك في خلال يومين لتأكيد طلبك.</string>
+    <string name="your_data">Your Data</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="country">Country</string>
+    <string name="address">Detailed address</string>
+    <string name="order">Order</string>
 </resources>
