@@ -29,7 +29,7 @@ class CartAdapter(private var cartList: ArrayList<CartItem>) :
 
             deleteProductIV.setOnClickListener {
                 cartList.removeAt(position)
-                notifyItemChanged(position)
+                notifyDataSetChanged()
             }
         }
     }

@@ -41,4 +41,5 @@
     <string name="country">Country</string>
     <string name="address">Detailed address</string>
     <string name="order">Order</string>
+    <string name="products">Products</string>
 </resources>
