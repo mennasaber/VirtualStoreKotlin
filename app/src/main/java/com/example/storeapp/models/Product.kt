@@ -7,13 +7,14 @@ import android.os.Parcelable
 data class Product(
     val id: String?,
     val code: String,
-    val colors: String,
-    val size: String,
+    var colors: String,
+    var size: String,
     val material: String,
-    val details: String,
-    val price: Float,
-    var image: String?
-):Parcelable {
+    var details: String,
+    var price: Float,
+    var image: String?,
+    var offer: Float = 0f
+) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString()!!,
@@ -22,7 +23,8 @@ data class Product(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readFloat(),
-        parcel.readString()
+        parcel.readString(),
+        parcel.readFloat()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -34,6 +36,7 @@ data class Product(
         parcel.writeString(details)
         parcel.writeFloat(price)
         parcel.writeString(image)
+        parcel.writeFloat(offer)
     }
 
     override fun describeContents(): Int {
@@ -48,5 +51,12 @@ data class Product(
         override fun newArray(size: Int): Array<Product?> {
             return arrayOfNulls(size)
         }
+    }
+    fun thereIsOffer():Boolean{
+        return offer!=0f
+    }
+    fun getPriceAfterOffer():Float{
+        return if (offer==0f) price
+        else offer
     }
 }

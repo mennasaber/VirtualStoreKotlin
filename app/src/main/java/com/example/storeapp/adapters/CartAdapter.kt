@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.storeapp.R
 import com.example.storeapp.databinding.CartItemBinding
+import com.example.storeapp.interfaces.OnRemoveClickListener
 import com.example.storeapp.models.CartItem
 
-class CartAdapter(private var cartList: ArrayList<CartItem>) :
+class CartAdapter(private var cartList: ArrayList<CartItem>,var onRemoveClickListener: OnRemoveClickListener) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     class CartViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding: CartItemBinding = CartItemBinding.bind(view)
@@ -28,6 +29,7 @@ class CartAdapter(private var cartList: ArrayList<CartItem>) :
             productPriceTV.text = cartList[position].productPrice.toString() + " LE."
 
             deleteProductIV.setOnClickListener {
+                onRemoveClickListener.onRemove(cartList[position].productPrice)
                 cartList.removeAt(position)
                 notifyDataSetChanged()
             }

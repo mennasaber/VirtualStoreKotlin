@@ -8,6 +8,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 
 class HomeFragmentVM : ViewModel() {
+    var spinnerPosition=0
     private val productsCodes: MutableLiveData<ArrayList<Product>> = MutableLiveData()
     fun getProducts(): LiveData<ArrayList<Product>> {
         FirebaseFirestore.getInstance().collection("Products").addSnapshotListener { value, _ ->
@@ -27,7 +28,8 @@ class HomeFragmentVM : ViewModel() {
                 image = document["image"] as String?,
                 price = (document["price"] as Double).toFloat(),
                 details = document["details"] as String,
-                size = document["size"] as String
+                size = document["size"] as String,
+                offer = (document["offer"] as Double).toFloat()
             )
             list.add(product)
         }

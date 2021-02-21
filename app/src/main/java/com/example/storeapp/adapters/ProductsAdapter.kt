@@ -1,14 +1,15 @@
 package com.example.storeapp.adapters
 
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.storeapp.models.Product
 import com.example.storeapp.R
 import com.example.storeapp.databinding.ProductItemBinding
-import com.example.storeapp.models.Product
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -33,7 +34,16 @@ class ProductsAdapter(
         product.apply {
             holder.binding.apply {
                 productName.text = "Code $code"
-                productPrice.text = "$price LE."
+                if (product.offer != 0f) {
+                    productPrice.text = "${product.offer} LE."
+                    removedPriceTV.text = "${product.price} LE."
+                    removedPriceTV.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                }
+                else
+                {
+                    productPrice.text = "${product.price} LE."
+                    removedPriceTV.visibility = View.GONE
+                }
                 progressBar.visibility = View.VISIBLE
                 Picasso.get().load(image).into(productImage, object : Callback {
                     override fun onSuccess() {

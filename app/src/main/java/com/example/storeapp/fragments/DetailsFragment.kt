@@ -1,5 +1,6 @@
 package com.example.storeapp.fragments
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,13 +33,12 @@ class DetailsFragment : Fragment(), View.OnClickListener {
     ): View {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
         toolbarBinding = LayoutTopDetailsToolbarBinding.bind(binding.root)
-        setupUI()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = Navigation.findNavController(view)
-        toolbarBinding.backIV.setOnClickListener(this)
+        setupUI()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,13 +49,17 @@ class DetailsFragment : Fragment(), View.OnClickListener {
     private fun setupUI() {
         binding.apply {
             codeTV.text = product.code
-            priceTV.text = "${product.price} LE."
             materialTV.text = product.material
             detailsTV.text = product.details
             sizeTV.text = product.size
             colorsTV.text = product.colors
             progressBar.visibility = View.VISIBLE
-
+            if (product.thereIsOffer()) {
+                priceTV.text = "${product.offer} LE."
+                removedPriceTV.text = "${product.price} LE."
+                removedPriceTV.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            } else
+                priceTV.text = "${product.price} LE."
             Picasso.get().load(product.image).into(productIV, object : Callback {
                 override fun onSuccess() {
                     progressBar.visibility = View.INVISIBLE
@@ -68,6 +72,7 @@ class DetailsFragment : Fragment(), View.OnClickListener {
         }
         binding.productIV.setOnClickListener(this)
         binding.addToCartB.setOnClickListener(this)
+        toolbarBinding.backIV.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
@@ -109,7 +114,7 @@ class DetailsFragment : Fragment(), View.OnClickListener {
                     dialogBinding.sizeSpinner.selectedItem.toString(),
                     dialogBinding.colorSpinner.selectedItem.toString(),
                     product.code,
-                    product.price
+                    product.getPriceAfterOffer()
                 )
             )
             Toast.makeText(requireContext(), "Product added to cart", Toast.LENGTH_SHORT).show()

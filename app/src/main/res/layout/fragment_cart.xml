@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="100dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="100dp"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -92,11 +92,12 @@
             android:background="@color/dark_gray"
             android:orientation="horizontal"
             android:padding="16dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@+id/addToCartB"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/confirmOrderB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cartRecyclerView">
+            app:layout_constraintTop_toBottomOf="@+id/cartRecyclerView"
+            app:layout_constraintVertical_bias="1.0">
 
             <TextView
                 android:layout_width="0dp"
